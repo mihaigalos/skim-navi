@@ -15,7 +15,7 @@ pub enum Navigation {
 pub struct Navi;
 
 impl Navi {
-    pub async fn run<Fut>(base_url: String, handler: impl Fn(&str) -> Fut)
+    pub async fn run<Fut>(base_url: String, handler: impl Fn(&str) -> Fut, verbose: bool)
     where
         Fut: Future<Output = Result<Vec<String>, Error>>,
     {
@@ -37,17 +37,17 @@ impl Navi {
                     Key::Char('/') => out
                         .selected_items
                         .iter()
-                        .map(|i| Self::navigate_into(&i.text()))
+                        .map(|i| Self::navigate_into(&i.text(), verbose))
                         .collect(),
                     Key::Tab => out
                         .selected_items
                         .iter()
-                        .map(|i| Self::navigate_into(&i.text()))
+                        .map(|i| Self::navigate_into(&i.text(), verbose))
                         .collect(),
                     Key::Enter => out
                         .selected_items
                         .iter()
-                        .map(|i| Self::navigate_enter(&i.text()))
+                        .map(|i| Self::navigate_enter(&i.text(), verbose))
                         .collect(),
                     _ => Vec::new(),
                 })
@@ -73,21 +73,27 @@ impl Navi {
         path
     }
 
-    fn navigate_outof(item: &str) -> (Navigation, String) {
-        println!("{}", item);
+    fn navigate_outof(item: &str, verbose: bool) -> (Navigation, String) {
+        if verbose {
+            println!("{}", item);
+        }
         (Navigation::OutOf, item.to_string())
     }
 
-    fn navigate_into(item: &str) -> (Navigation, String) {
-        println!("/{}", item);
+    fn navigate_into(item: &str, verbose: bool) -> (Navigation, String) {
+        if verbose {
+            println!("/{}", item);
+        }
         (Navigation::Running, item.to_string())
     }
 
-    fn navigate_enter(item: &str) -> (Navigation, String) {
+    fn navigate_enter(item: &str, verbose: bool) -> (Navigation, String) {
         if item == ".." {
-            return Self::navigate_outof(item);
+            return Self::navigate_outof(item, verbose);
         }
-        println!("Navigation finished: {}", item);
+        if verbose {
+            println!("Navigation finished: {}", item);
+        }
         (Navigation::Finished, item.to_string())
     }
 }
