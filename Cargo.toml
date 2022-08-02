@@ -2,5 +2,15 @@
 name = "skim-navi"
 version = "0.0.1"
 edition = "2021"
+authors = ["Mihai Galos <mihaigalos@gmail.com>"]
+description = "🏎️ A friendlier skim façade."
+categories = [
+    "command-line-utilities",
+]
+keywords = [
+    "cli",
+]
+repository = "https://github.com/mihaigalos/skim-navi"
+license = "MIT"
 
 [dependencies]
