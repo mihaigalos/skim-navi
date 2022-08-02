@@ -1,6 +1,6 @@
 [package]
 name = "skim-navi"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 authors = ["Mihai Galos <mihaigalos@gmail.com>"]
 description = "🏎️ A friendlier skim façade."
@@ -14,3 +14,4 @@ repository = "https://github.com/mihaigalos/skim-navi"
 license = "MIT"
 
 [dependencies]
+skim = "0.9.4"
