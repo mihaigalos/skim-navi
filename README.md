@@ -1,5 +1,7 @@
 # skim-navi
 
+🚧 Work in progress 🚧
+
 A friendlier skim façade.
 
 
