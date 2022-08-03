@@ -1,13 +1,13 @@
 use regex::Regex;
 use reqwest::Client;
+use skim_navi::Navi;
 use std::io::Error;
 
-async fn list(input: &str) -> Result<String, Error> {
+async fn list(input: String) -> Result<String, Error> {
     let res = Client::new()
         .get(input)
         .send()
         .await
-        .or(Err(format!("Failed to GET from {}", &input)))
         .unwrap()
         .text()
         .await
@@ -16,7 +16,7 @@ async fn list(input: &str) -> Result<String, Error> {
     Ok(res)
 }
 
-pub async fn get_links(input: &str) -> Result<Vec<String>, Error> {
+pub async fn get_links(input: String) -> Result<Vec<String>, Error> {
     let mut result = Vec::new();
     let res = list(input).await.unwrap();
     let lines: Vec<&str> = res.split('\n').collect();
@@ -46,9 +46,6 @@ async fn main() {
             .unwrap();
     });
 
-    let _ = tokio::spawn(async {
-        let links = get_links("http://localhost:8080").await.unwrap();
-        println!("{:?}", links);
-    })
-    .await;
+    let result = Navi::run("http://localhost:8080", get_links).await;
+    println!("{:?}", result);
 }

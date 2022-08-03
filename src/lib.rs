@@ -16,7 +16,7 @@ pub enum Navigation {
 pub struct Navi;
 
 impl Navi {
-    pub async fn run<Fut>(base_url: String, handler: impl Fn(&str) -> Fut)
+    pub async fn run<'a, Fut>(base_url: &str, handler: impl Fn(String) -> Fut)
     where
         Fut: Future<Output = Result<Vec<String>, Error>>,
     {
@@ -28,8 +28,8 @@ impl Navi {
             .unwrap();
         let mut subpath = "/".to_string();
         loop {
-            let path = base_url.clone() + &subpath;
-            let items = handler(&path).await.unwrap().join("\n");
+            let path = base_url.to_string() + &subpath;
+            let items = handler(path).await.unwrap().join("\n");
 
             let item_reader = SkimItemReader::default();
             let items = item_reader.of_bufread(Cursor::new(items));
