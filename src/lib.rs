@@ -16,7 +16,7 @@ pub enum Navigation {
 pub struct Navi;
 
 impl Navi {
-    pub async fn run<'a, Fut>(base_url: &str, handler: impl Fn(String) -> Fut)
+    pub async fn run<'a, Fut>(base_url: &str, handler: impl Fn(String) -> Fut) -> Option<String>
     where
         Fut: Future<Output = Result<Vec<String>, Error>>,
     {
@@ -54,9 +54,13 @@ impl Navi {
                 })
                 .unwrap();
 
+            if selected_items.len() == 0 {
+                return None;
+            }
             let item = &selected_items[0];
+
             if item.0 == Navigation::Finished {
-                break;
+                return Some(item.1.to_string());
             }
 
             if item.0 == Navigation::OutOf {
