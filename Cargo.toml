@@ -15,4 +15,4 @@ license = "MIT"
 
 [dependencies]
 log = "0.4.17"
-skim = "0.10.1"
+skim = "0.10.2"
