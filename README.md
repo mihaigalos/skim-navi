@@ -1,5 +1,7 @@
 # skim-navi
-[![crates.io](https://img.shields.io/crates/d/skim-navi.svg)](https://crates.io/crates/skim-navi) [![LoC](https://tokei.rs/b1/github/mihaigalos/skim-navi)](https://github.com/mihaigalos/skim-navi)
+[![CD-auto](https://github.com/mihaigalos/skim-navi/actions/workflows/cd-auto.yaml/badge.svg)](https://github.com/mihaigalos/skim-navi/actions/workflows/cd-auto.yaml)
+[![crates.io](https://img.shields.io/crates/d/skim-navi.svg)](https://crates.io/crates/skim-navi)
+[![LoC](https://tokei.rs/b1/github/mihaigalos/skim-navi)](https://github.com/mihaigalos/skim-navi)
 
 A friendlier skim façade.
 
