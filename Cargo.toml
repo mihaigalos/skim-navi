@@ -15,7 +15,7 @@ license = "MIT"
 
 [dependencies]
 log = "0.4.17"
-skim = "0.10.2"
+skim = "0.10.3"
 
 [dev-dependencies]
 regex = "1.7.1"
